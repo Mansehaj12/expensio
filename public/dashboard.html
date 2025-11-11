@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="logo">💰 Expensio</h2>
+      <ul class="menu">
+        <li>
+          <a href="#" class="active"><i class="fa fa-home"></i> Home</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-wallet"></i> Expenses</a>
+        </li>
+        <li>
+          <a href="#" id="openReportsBtn"
+            ><i class="fa fa-chart-bar"></i> Reports</a
+          >
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-cog"></i> Settings</a>
+        </li>
+      </ul>
+      <button id="logoutBtn" class="logout-btn">
+        <i class="fa fa-sign-out-alt"></i> Logout
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header>
+        <h1>Welcome back, <span id="userName">Mansehaj</span> 👋</h1>
+      </header>
+
+      <!-- Summary Cards -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <h3>Total Spent</h3>
+          <p id="totalSpent">€0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Submitted</h3>
+          <p id="submittedCount">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Pending</h3>
+          <p id="pendingCount">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Average</h3>
+          <p id="avgSpent">€0</p>
+        </div>
+      </section>
+
+      <!-- Main Dashboard Content -->
+      <section class="dashboard-grid">
+        <!-- Left: Expense Table -->
+        <div class="card expenses-section">
+          <div class="expenses-header">
+            <h2>Recent Expenses</h2>
+            <button id="openModalBtn" class="add-btn">
+              <i class="fa fa-plus"></i> Add Expense
+            </button>
+          </div>
+
+          <table id="expenseTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Detail</th>
+                <th>Merchant</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Right: Chart -->
+        <div class="card chart-section">
+          <h2>Expense Overview</h2>
+          <canvas id="expenseChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Add Expense Modal -->
+      <div id="expenseModal" class="modal">
+        <div class="modal-content card">
+          <span class="close-btn">&times;</span>
+          <h2>Add New Expense</h2>
+          <form id="addExpenseForm">
+            <input type="date" id="expDate" required />
+            <input
+              type="text"
+              id="expDetail"
+              placeholder="Description"
+              required
+            />
+            <input
+              type="text"
+              id="expMerchant"
+              placeholder="Merchant"
+              required
+            />
+            <input
+              type="number"
+              id="expAmount"
+              placeholder="Amount (€)"
+              required
+            />
+            <select id="expStatus" required>
+              <option value="submitted">Submitted</option>
+              <option value="pending">Pending</option>
+            </select>
+            <button type="submit" class="btn-login">Save Expense</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Reports Modal -->
+      <div id="reportsModal" class="modal">
+        <div class="modal-content card reports-box">
+          <span class="close-btn close-reports">&times;</span>
+          <h2>Expense Reports</h2>
+          <div class="reports-grid">
+            <div class="report-card">
+              <h3>📈 Monthly Spending Trend</h3>
+              <canvas id="monthlyTrendChart"></canvas>
+            </div>
+            <div class="report-card">
+              <h3>📊 Submitted vs Pending</h3>
+              <canvas id="statusChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

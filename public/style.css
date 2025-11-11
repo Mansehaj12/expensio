@@ -1,0 +1,217 @@
+:root {
+  --accent: #00c2ff;
+  --accent-2: #2563eb;
+}
+
+[data-theme="purple"] {
+  --accent: #a855f7;
+  --accent-2: #7e22ce;
+}
+
+[data-theme="green"] {
+  --accent: #10b981;
+  --accent-2: #047857;
+}
+
+[data-theme="orange"] {
+  --accent: #fb923c;
+  --accent-2: #ea580c;
+}
+
+/* ---- Base design (from your previous version) ---- */
+
+body.login-body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #0b0f13, #101820);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  color: #f8fafc;
+}
+
+/* Theme dropdown */
+.theme-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.theme-switcher select {
+  background: #1f2937;
+  color: #f8fafc;
+  border: 1px solid #374151;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Container */
+.login-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  padding: 20px;
+}
+
+.login-card {
+  display: flex;
+  background: #0a0f16;
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+  min-height: 560px;
+}
+
+/* LEFT SIDE */
+.login-left {
+  flex: 0.6;
+  position: relative;
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #f8fafc;
+  text-align: center;
+  padding: 40px;
+  overflow: hidden;
+}
+.login-left .overlay {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  opacity: 0.15;
+  filter: blur(4px);
+}
+.login-left .illustration {
+  width: 120px;
+  z-index: 2;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 15px rgba(0,194,255,0.3));
+}
+.login-left .text { z-index: 2; }
+.login-left h2 { font-size: 1.6rem; font-weight: 600; }
+.login-left h2 span { color: var(--accent); }
+.login-left p { color: #9ca3af; font-size: 0.9rem; max-width: 250px; margin: 10px auto 0; }
+
+/* RIGHT SIDE */
+.login-right {
+  flex: 1.4;
+  background: #111827;
+  padding: 60px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-right h3 {
+  font-size: 1.7rem;
+  margin-bottom: 25px;
+  color: #f8fafc;
+  text-align: center;
+}
+
+/* Form */
+.login-right form {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.input-group {
+  position: relative;
+}
+.input-group i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+.input-group input {
+  width: 100%;
+  padding: 14px 14px 14px 42px;
+  border-radius: 10px;
+  border: 1px solid #2d3748;
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.3s;
+}
+.input-group input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 6px rgba(0, 194, 255, 0.3);
+}
+
+/* Button */
+.btn-login {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.btn-login:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* --- Ensure Input & Button Are the Same Height --- */
+.input-group input,
+.btn-login {
+  height: 50px; /* same height */
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Adjust inner text alignment for inputs */
+.input-group input {
+  padding: 0 14px 0 42px;
+  line-height: 50px;
+}
+
+/* Make button text perfectly centered */
+.btn-login {
+  line-height: 50px;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+
+/* Options */
+.options {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+.options a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.options a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .login-card {
+    flex-direction: column;
+  }
+  .login-left {
+    flex: none;
+    padding: 30px;
+  }
+  .login-right {
+    flex: none;
+    padding: 40px;
+  }
+}

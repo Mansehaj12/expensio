@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Expensio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="login-body">
+    <div class="theme-switcher">
+      <select id="themeSelect">
+        <option value="blue">💙 Blue</option>
+        <option value="purple">💜 Purple</option>
+        <option value="green">💚 Green</option>
+        <option value="orange">🧡 Orange</option>
+      </select>
+    </div>
+
+    <div class="login-wrapper">
+      <div class="login-card">
+        <!-- Left Section -->
+        <div class="login-left">
+          <div class="overlay"></div>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png"
+            alt="illustration"
+            class="illustration"
+          />
+          <div class="text">
+            <h2>Welcome to <span>Expensio</span></h2>
+            <p>
+              Track your expenses effortlessly and stay on top of your finances.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="login-right">
+          <h3>Member Login</h3>
+          <form id="loginForm">
+            <div class="input-group">
+              <i class="fa fa-envelope"></i>
+              <input
+                type="text"
+                id="username"
+                placeholder="Username"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <i class="fa fa-lock"></i>
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+
+            <!-- Remember Me -->
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 10px;
+              "
+            >
+              <input type="checkbox" id="rememberMe" />
+              <label for="rememberMe" style="font-size: 0.9rem; color: #9ca3af"
+                >Remember Me</label
+              >
+            </div>
+
+            <button type="submit" class="btn-login">LOGIN</button>
+          </form>
+
+          <div class="options">
+            <p>Don’t have an account? <a href="signup.html">Create one</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+    <script>
+      // ==========================
+      // AUTO-LOGIN CHECK
+      // ==========================
+      const rememberedUser =
+        localStorage.getItem("loggedInUser") ||
+        sessionStorage.getItem("loggedInUser");
+      if (rememberedUser) {
+        window.location.href = "dashboard.html";
+      }
+
+      // ==========================
+      // LOGIN LOGIC (FIXED)
+      // ==========================
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const user = document
+            .getElementById("username")
+            .value.trim()
+            .toLowerCase();
+          const pass = document.getElementById("password").value;
+          const remember = document.getElementById("rememberMe").checked;
+
+          // Load registered users
+          const users =
+            JSON.parse(localStorage.getItem("registeredUsers")) || {};
+
+          // Demo users
+          const demoUsers = {
+            mansehaj: "12345",
+            arjun: "12345",
+          };
+
+          if (
+            (demoUsers[user] && demoUsers[user] === pass) ||
+            (users[user] && users[user].password === pass)
+          ) {
+            // Save user persistently in BOTH storages (to avoid timing issues)
+            localStorage.setItem("loggedInUser", user);
+            sessionStorage.setItem("loggedInUser", user);
+
+            window.location.href = "dashboard.html";
+          } else {
+            alert(
+              "❌ Invalid credentials. Please check your username or password."
+            );
+          }
+        });
+
+      // ==========================
+      // THEME SWITCHER
+      // ==========================
+      const themeSelect = document.getElementById("themeSelect");
+      themeSelect.addEventListener("change", () => {
+        document.documentElement.setAttribute("data-theme", themeSelect.value);
+        localStorage.setItem("expensioTheme", themeSelect.value);
+      });
+
+      // Load saved theme
+      const saved = localStorage.getItem("expensioTheme") || "blue";
+      themeSelect.value = saved;
+      document.documentElement.setAttribute("data-theme", saved);
+    </script>
+  </body>
+</html>

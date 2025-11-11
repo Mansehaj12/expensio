@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | Expensio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="login-body">
+    <div class="theme-switcher">
+      <select id="themeSelect">
+        <option value="blue">💙 Blue</option>
+        <option value="purple">💜 Purple</option>
+        <option value="green">💚 Green</option>
+        <option value="orange">🧡 Orange</option>
+      </select>
+    </div>
+
+    <div class="login-wrapper">
+      <div class="login-card">
+        <!-- Left Side -->
+        <div class="login-left">
+          <div class="overlay"></div>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png"
+            alt="illustration"
+            class="illustration"
+          />
+          <div class="text">
+            <h2>Join <span>Expensio</span></h2>
+            <p>
+              Create your account and start tracking your finances effortlessly.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="login-right">
+          <h3>Create Account</h3>
+          <form id="signupForm">
+            <div class="input-group">
+              <i class="fa fa-user"></i>
+              <input
+                type="text"
+                id="newUsername"
+                placeholder="Create Username"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <i class="fa fa-envelope"></i>
+              <input type="email" id="newEmail" placeholder="Enter Email ID" required />
+            </div>
+
+            <div class="input-group">
+              <i class="fa fa-lock"></i>
+              <input
+                type="password"
+                id="newPassword"
+                placeholder="Create Password"
+                required
+                minlength="5"
+              />
+            </div>
+
+            <button type="submit" class="btn-login">SIGN UP</button>
+          </form>
+
+          <div class="options">
+            <p>Already have an account? <a href="index.html">Login here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+
+    <script>
+      // Handle Signup
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const username = document
+            .getElementById("newUsername")
+            .value.trim()
+            .toLowerCase();
+          const email = document.getElementById("newEmail").value.trim();
+          const password = document.getElementById("newPassword").value;
+
+          // Get existing users
+          const users =
+            JSON.parse(localStorage.getItem("registeredUsers")) || {};
+
+          if (users[username]) {
+            alert("Username already exists. Try another.");
+            return;
+          }
+
+          // Save new user
+          users[username] = { email, password };
+          localStorage.setItem("registeredUsers", JSON.stringify(users));
+
+          alert("🎉 Account created successfully! You can now log in.");
+          window.location.href = "index.html";
+        });
+
+      // Theme switcher logic (same as login)
+      const themeSelect = document.getElementById("themeSelect");
+      themeSelect.addEventListener("change", () => {
+        document.documentElement.setAttribute("data-theme", themeSelect.value);
+        localStorage.setItem("expensioTheme", themeSelect.value);
+      });
+
+      const saved = localStorage.getItem("expensioTheme") || "blue";
+      themeSelect.value = saved;
+      document.documentElement.setAttribute("data-theme", saved);
+    </script>
+  </body>
+</html>
